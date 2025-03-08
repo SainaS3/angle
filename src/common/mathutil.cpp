@@ -31,6 +31,9 @@ constexpr int g_sharedexp_bias = 15;
 // N is the number of mantissa bits per component (9)
 constexpr int g_sharedexp_mantissabits = 9;
 
+// number of mantissa bits per component pre-biased
+constexpr int g_sharedexp_biased_mantissabits = g_sharedexp_bias + g_sharedexp_mantissabits;
+
 // Emax is the maximum allowed biased exponent value (31)
 constexpr int g_sharedexp_maxexponent = 31;
 
@@ -63,11 +66,14 @@ unsigned int convertRGBFloatsTo999E5(float red, float green, float blue)
 
 void convert999E5toRGBFloats(unsigned int input, float *red, float *green, float *blue)
 {
-    const RGB9E5Data *inputData = reinterpret_cast<const RGB9E5Data*>(&input);
+    const RGB9E5Data *inputData = reinterpret_cast<const RGB9E5Data *>(&input);
 
-    *red = inputData->R * pow(2.0f, (int)inputData->E - g_sharedexp_bias - g_sharedexp_mantissabits);
-    *green = inputData->G * pow(2.0f, (int)inputData->E - g_sharedexp_bias - g_sharedexp_mantissabits);
-    *blue = inputData->B * pow(2.0f, (int)inputData->E - g_sharedexp_bias - g_sharedexp_mantissabits);
+    const float pow2_exp =
+        pow(2.0f, static_cast<float>(inputData->E) - g_sharedexp_biased_mantissabits);
+
+    *red   = inputData->R * pow2_exp;
+    *green = inputData->G * pow2_exp;
+    *blue  = inputData->B * pow2_exp;
 }
 
 }  // namespace gl

@@ -449,6 +449,11 @@
   <ItemGroup>
     <ResourceCompile Include="..\..\..\src\libGLESv2\libGLESv2.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="copy_scripts.vcxproj">
+      <Project>{dc6c63ff-c15c-68a1-5864-fb597d75b2b3}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -32,80 +32,80 @@ REM ----------------------------------------------------------------------------
 REM ---------------------------------------------------------------------------------------------------------
 REM Install Visual Studio 2013 templates
 REM ---------------------------------------------------------------------------------------------------------
-echo Installing ANGLE's Visual Studio 2013 templates
+@REM echo Installing ANGLE's Visual Studio 2013 templates
 
-IF NOT EXIST "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates" GOTO NOVS2013
-echo    Visual Studio 2013 templates directory found
+@REM IF NOT EXIST "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates" GOTO NOVS2013
+@REM echo    Visual Studio 2013 templates directory found
+
+@REM REM delete any old ANGLE templates
+@REM IF EXIST "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Store Apps\Universal Apps\UniversalCoreWindow" (
+@REM echo    Removing old VS2013 UniversalCoreWindow template
+@REM @RD /S /Q "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Store Apps\Universal Apps\UniversalCoreWindow"
+@REM )
+@REM IF EXIST "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Store Apps\Universal Apps\UniversalSwapChainPanel" (
+@REM echo    Removing old VS2013 UniversalSwapChainPanel template
+@REM @RD /S /Q "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Store Apps\Universal Apps\UniversalSwapChainPanel"
+@REM )
+@REM IF EXIST "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Win32\DesktopHelloTriangle" (
+@REM echo    Removing old VS2013 DesktopHelloTriangle template
+@REM @RD /S /Q "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Win32\DesktopHelloTriangle"
+@REM )
+
+@REM REM Install new templates
+@REM XCOPY "%~dp08.1" "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates" /s /d /y > nul
+@REM IF %ERRORLEVEL% NEQ 0 ( 
+@REM     echo    Failed to install templates for Visual Studio 2013.
+@REM     echo    See www.github.com/Microsoft/angle/wiki/installing-templates for manual installation steps.
+@REM ) ELSE (
+@REM     echo    Successfully installed latest Visual Studio 2013 templates.
+@REM )
+
+@REM GOTO ENDVS2013
+
+@REM :NOVS2013
+@REM echo    Visual Studio 2013 template directory not found. Skipped installing VS2013 templates.
+@REM :ENDVS2013
+REM ---------------------------------------------------------------------------------------------------------
+
+REM ---------------------------------------------------------------------------------------------------------
+REM Install Visual Studio 2022 templates
+REM ---------------------------------------------------------------------------------------------------------
+echo Installing ANGLE's Visual Studio 2022 templates
+
+IF NOT EXIST "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates" GOTO NOVS2022
+echo    Visual Studio 2022 templates directory found
 
 REM delete any old ANGLE templates
-IF EXIST "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Store Apps\Universal Apps\UniversalCoreWindow" (
-echo    Removing old VS2013 UniversalCoreWindow template
-@RD /S /Q "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Store Apps\Universal Apps\UniversalCoreWindow"
+IF EXIST "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates\Windows\Windows Universal\CoreWindowUniversal" (
+echo    Removing old VS2022 CoreWindowUniversal template
+@RD /S /Q "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates\Windows\Windows Universal\CoreWindowUniversal"
 )
-IF EXIST "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Store Apps\Universal Apps\UniversalSwapChainPanel" (
-echo    Removing old VS2013 UniversalSwapChainPanel template
-@RD /S /Q "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Store Apps\Universal Apps\UniversalSwapChainPanel"
+IF EXIST "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates\Windows\Windows Universal\XamlUniversal" (
+echo    Removing old VS2022 XamlUniversal template
+@RD /S /Q "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates\Windows\Windows Universal\XamlUniversal"
 )
-IF EXIST "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Win32\DesktopHelloTriangle" (
-echo    Removing old VS2013 DesktopHelloTriangle template
-@RD /S /Q "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates\Win32\DesktopHelloTriangle"
+IF EXIST "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates\Windows\Universal\CoreWindowUniversal" (
+echo    Removing old VS2022 CoreWindowUniversal template
+@RD /S /Q "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates\Windows\Universal\CoreWindowUniversal"
+)
+IF EXIST "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates\Windows\Universal\XamlUniversal" (
+echo    Removing old VS2022 XamlUniversal template
+@RD /S /Q "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates\Windows\Universal\XamlUniversal"
 )
 
-REM Install new templates
-XCOPY "%~dp08.1" "%userprofile%\Documents\Visual Studio 2013\Templates\ProjectTemplates" /s /d /y > nul
+XCOPY "%~dp010" "%userprofile%\Documents\Visual Studio 2022\Templates\ProjectTemplates" /s /d /y > nul
 IF %ERRORLEVEL% NEQ 0 ( 
-    echo    Failed to install templates for Visual Studio 2013.
+    echo    Failed to install templates for Visual Studio 2022.
     echo    See www.github.com/Microsoft/angle/wiki/installing-templates for manual installation steps.
 ) ELSE (
-    echo    Successfully installed latest Visual Studio 2013 templates.
+    echo    Successfully installed latest Visual Studio 2022 templates.
 )
 
-GOTO ENDVS2013
+GOTO ENDVS2022
 
-:NOVS2013
-echo    Visual Studio 2013 template directory not found. Skipped installing VS2013 templates.
-:ENDVS2013
-REM ---------------------------------------------------------------------------------------------------------
-
-REM ---------------------------------------------------------------------------------------------------------
-REM Install Visual Studio 2015 templates
-REM ---------------------------------------------------------------------------------------------------------
-echo Installing ANGLE's Visual Studio 2015 templates
-
-IF NOT EXIST "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates" GOTO NOVS2015
-echo    Visual Studio 2015 templates directory found
-
-REM delete any old ANGLE templates
-IF EXIST "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Windows\Windows Universal\CoreWindowUniversal" (
-echo    Removing old VS2015 CoreWindowUniversal template
-@RD /S /Q "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Windows\Windows Universal\CoreWindowUniversal"
-)
-IF EXIST "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Windows\Windows Universal\XamlUniversal" (
-echo    Removing old VS2015 XamlUniversal template
-@RD /S /Q "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Windows\Windows Universal\XamlUniversal"
-)
-IF EXIST "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Windows\Universal\CoreWindowUniversal" (
-echo    Removing old VS2015 CoreWindowUniversal template
-@RD /S /Q "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Windows\Universal\CoreWindowUniversal"
-)
-IF EXIST "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Windows\Universal\XamlUniversal" (
-echo    Removing old VS2015 XamlUniversal template
-@RD /S /Q "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Windows\Universal\XamlUniversal"
-)
-
-XCOPY "%~dp010" "%userprofile%\Documents\Visual Studio 2015\Templates\ProjectTemplates" /s /d /y > nul
-IF %ERRORLEVEL% NEQ 0 ( 
-    echo    Failed to install templates for Visual Studio 2015.
-    echo    See www.github.com/Microsoft/angle/wiki/installing-templates for manual installation steps.
-) ELSE (
-    echo    Successfully installed latest Visual Studio 2015 templates.
-)
-
-GOTO ENDVS2015
-
-:NOVS2015
-echo    Visual Studio 2015 template directory not found. Skipped installing VS2015 templates.
-:ENDVS2015
+:NOVS2022
+echo    Visual Studio 2022 template directory not found. Skipped installing VS2022 templates.
+:ENDVS2022
 REM ---------------------------------------------------------------------------------------------------------
 
 echo Script complete.
